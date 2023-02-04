@@ -40,15 +40,15 @@ public class CacheTest extends BaseMapperTest {
 			//调用 selectById 方法，查询 id = 1 的用户
 			SysUser user2 = userMapper.selectById(1l);
 			//第二个 session 获取的用户名仍然是 admin
-			Assert.assertNotEquals("New Name", user2.getUserName());
+			Assert.assertNotSame("New Name", user2.getUserName());
 			//这里的 user2 和 前一个 session 查询的结果是两个不同的实例
-			Assert.assertNotEquals(user1, user2);
+			Assert.assertNotSame(user1, user2);
 			//执行删除操作
 			userMapper.deleteById(2L);
 			//获取 user3
 			SysUser user3 = userMapper.selectById(1l);
 			//这里的 user2 和 user3 是两个不同的实例
-			Assert.assertNotEquals(user2, user3);
+			Assert.assertNotSame(user2, user3);
 		} finally {
 			//关闭 sqlSession
 			sqlSession.close();
@@ -72,7 +72,7 @@ public class CacheTest extends BaseMapperTest {
 			//虽然我们没有更新数据库，但是这个用户名和我们 role1 重新赋值的名字相同了
 			Assert.assertEquals("New Name", role2.getRoleName());
 			//不仅如何，role2 和 role1 完全就是同一个实例
-			Assert.assertNotEquals(role1, role2);
+			Assert.assertNotSame(role1, role2);
 		} finally {
 			//关闭当前的 sqlSession
 			sqlSession.close();
@@ -88,11 +88,11 @@ public class CacheTest extends BaseMapperTest {
 			//第二个 session 获取的用户名仍然是 admin
 			Assert.assertEquals("New Name", role2.getRoleName());
 			//这里的 role2 和 前一个 session 查询的结果是两个不同的实例
-			Assert.assertNotEquals(role1, role2);
+			Assert.assertNotSame(role1, role2);
 			//获取 role3
 			SysRole role3 = roleMapper.selectById(1l);
 			//这里的 role2 和 role3 是两个不同的实例
-			Assert.assertNotEquals(role2, role3);
+			Assert.assertNotSame(role2, role3);
 		} finally {
 			//关闭 sqlSession
 			sqlSession.close();
