@@ -41,7 +41,10 @@
         </environment>
     </environments>
 
+
+    <!-- todo 4、resource 扫描的是 mapper.xml 的具体文件；而 package 是扫描到对应的mapper层接口包，再遍历扫描包下的mapper接口-->
     <mappers>
+<!--        <mapper resource="tk/mybatis/simple/mapper/xml/CountryMapper.xml"/>-->
         <package name="tk.mybatis.simple.mapper"/>
     </mappers>
     
