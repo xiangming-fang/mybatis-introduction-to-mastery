@@ -33,8 +33,8 @@ public class JavaApiConfig {
 		configuration.getTypeAliasRegistry().registerAliases("tk.mybatis.simple.model");
 		configuration.setLogImpl(Log4jImpl.class);
 		
-		InputStream inputStream = Resources.getResourceAsStream("tk/mybatis/simple/mapper/xml/CountryMapper.xml");
-        XMLMapperBuilder mapperParser = new XMLMapperBuilder(inputStream, configuration, "tk/mybatis/simple/mapper/xml/CountryMapper.xml", configuration.getSqlFragments());
+		InputStream inputStream = Resources.getResourceAsStream("tk/mybatis/simple/mapper/CountryMapper.xml");
+        XMLMapperBuilder mapperParser = new XMLMapperBuilder(inputStream, configuration, "tk/mybatis/simple/mapper/CountryMapper.xml", configuration.getSqlFragments());
         mapperParser.parse();
         
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(configuration);
