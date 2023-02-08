@@ -17,7 +17,9 @@ public class CountryMapperTest extends BaseMapperTest {
 	public void testSelectAll() {
 		SqlSession sqlSession = getSqlSession();
 		try {
+			// todo 3、这里的 tk.mybatis.simple.mapper.CountryMapper.selectAll 是一个方法的全限定名，是类的路径
 			List<Country> countryList = sqlSession.selectList("tk.mybatis.simple.mapper.CountryMapper.selectAll");
+//			List<Country> countryList = sqlSession.selectList("selectAll");
 			printCountryList(countryList);
 		} finally {
 			sqlSession.close();

@@ -13,6 +13,7 @@ import org.junit.BeforeClass;
  * 基础测试类
  */
 public class BaseMapperTest {
+
 	private static SqlSessionFactory sqlSessionFactory;
 	
 	@BeforeClass
@@ -21,8 +22,8 @@ public class BaseMapperTest {
             Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
             reader.close();
-        } catch (IOException ignore) {
-        	ignore.printStackTrace();
+        } catch (IOException e) {
+        	e.printStackTrace();
         }
 	}
 	
