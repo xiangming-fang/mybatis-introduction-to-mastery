@@ -164,7 +164,8 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+
+	// mybatis 动态sql
 	@Test
 	public void testInsert2Selective(){
 		SqlSession sqlSession = getSqlSession();
@@ -252,7 +253,8 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+
+	// chapter 4：mybatis 动态sql
 	@Test
 	public void testSelectByUser(){
 		SqlSession sqlSession = getSqlSession();

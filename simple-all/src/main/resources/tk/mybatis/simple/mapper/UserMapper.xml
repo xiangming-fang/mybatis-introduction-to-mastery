@@ -226,7 +226,8 @@
 		</set>
 		where id = #{id}
 	</update>	
-	
+
+	<!-- when …… when …… otherwise 相当于 if……else if…… else -->
 	<select id="selectByIdOrUserName" resultType="tk.mybatis.simple.model.SysUser">
 	    select id, 
 	    	user_name userName, 
