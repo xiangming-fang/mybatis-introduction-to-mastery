@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+// todo mapper 代理的简单模型
 public class MyMapperProxy<T> implements InvocationHandler {
     private Class<T> mapperInterface;
     private SqlSession sqlSession;
