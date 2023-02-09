@@ -16,6 +16,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import tk.mybatis.simple.model.SysRole;
 
+// mybatis 4种基本注解@Select、@Insert、@Update、@Delete 注解方式的使用
 @CacheNamespaceRef(RoleMapper.class)
 public interface RoleMapper {
 	
