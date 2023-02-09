@@ -13,19 +13,19 @@
 		<result property="headImg" column="head_img" jdbcType="BLOB"/>
 		<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
 	</resultMap>
-	
+
 	<resultMap id="userRoleMap" extends="userMap" type="tk.mybatis.simple.model.SysUser">
 		<association property="role" columnPrefix="role_" resultMap="tk.mybatis.simple.mapper.RoleMapper.roleMap"/>
 	</resultMap>
-	
+
 	<resultMap id="userRoleMapSelect" extends="userMap" type="tk.mybatis.simple.model.SysUser">
-		<association property="role" 
+		<association property="role"
 					 fetchType="lazy"
-					 select="tk.mybatis.simple.mapper.RoleMapper.selectRoleById" 
+					 select="tk.mybatis.simple.mapper.RoleMapper.selectRoleById"
 					 column="{id=role_id}"/>
 	</resultMap>
-	
-	<!-- 
+
+	<!--
 	<resultMap id="userRoleListMap" extends="userMap" type="tk.mybatis.simple.model.SysUser">
 		<id property="id" column="id"/>
 		<result property="userName" column="user_name"/>
@@ -43,26 +43,26 @@
 		</collection>
 	</resultMap>
 	 -->
-	 
+
 	<resultMap id="userRoleListMap" extends="userMap" type="tk.mybatis.simple.model.SysUser">
-		<collection property="roleList" columnPrefix="role_" 
+		<collection property="roleList" columnPrefix="role_"
 					resultMap="tk.mybatis.simple.mapper.RoleMapper.rolePrivilegeListMap"/>
 	</resultMap>
-	 
+
 	<resultMap id="userRoleListMapSelect" extends="userMap" type="tk.mybatis.simple.model.SysUser">
 		<collection property="roleList"
 					fetchType="lazy"
 					select="tk.mybatis.simple.mapper.RoleMapper.selectRoleByUserId"
 					column="{userId=id}"/>
 	</resultMap>
-	 
+
 	<select id="selectById" resultMap="userMap">
 		select * from sys_user where id = #{id}
 	</select>
-	
+
 	<select id="selectAll" resultType="tk.mybatis.simple.model.SysUser">
-	    select id, 
-	    	user_name userName, 
+	    select id,
+	    	user_name userName,
 	        user_password userPassword,
 	        user_email userEmail,
 	        user_info userInfo,
@@ -70,11 +70,11 @@
 	        create_time createTime
 	    from sys_user
 	</select>
-	
+
 	<select id="selectRolesByUserId" resultType="tk.mybatis.simple.model.SysRole">
-	    select 
-			r.id, 
-			r.role_name roleName, 
+	    select
+			r.id,
+			r.role_name roleName,
 			r.enabled,
 			r.create_by createBy,
 			r.create_time createTime,
@@ -85,11 +85,11 @@
 		inner join sys_role r on ur.role_id = r.id
 	    where u.id = #{userId}
 	</select>
-	
+
 	<select id="selectRolesByUserIdAndRoleEnabled" resultType="tk.mybatis.simple.model.SysRole">
-	    select 
-			r.id, 
-			r.role_name roleName, 
+	    select
+			r.id,
+			r.role_name roleName,
 			r.enabled,
 			r.create_by createBy,
 			r.create_time createTime
@@ -98,11 +98,11 @@
 		inner join sys_role r on ur.role_id = r.id
 	    where u.id = #{userId} and r.enabled = #{enabled}
 	</select>
-	
+
 	<select id="selectRolesByUserAndRole" resultType="tk.mybatis.simple.model.SysRole">
-	    select 
-			r.id, 
-			r.role_name roleName, 
+	    select
+			r.id,
+			r.role_name roleName,
 			r.enabled,
 			r.create_by createBy,
 			r.create_time createTime
@@ -111,62 +111,62 @@
 		inner join sys_role r on ur.role_id = r.id
 	    where u.id = #{user.id} and r.enabled = #{role.enabled}
 	</select>
-	
+
 	<insert id="insert">
 		insert into sys_user(
-			user_name, user_password, user_email, 
+			user_name, user_password, user_email,
 			user_info, head_img, create_time)
 		values(
-			#{userName}, #{userPassword}, #{userEmail}, 
+			#{userName}, #{userPassword}, #{userEmail},
 			#{userInfo}, #{headImg, jdbcType=BLOB}, #{createTime, jdbcType=TIMESTAMP})
 	</insert>
-	
+
 	<insert id="insert2" useGeneratedKeys="true" keyProperty="id">
 		insert into sys_user(
-			user_name, user_password, 
+			user_name, user_password,
 			<if test="userEmail != null">
 				<if test="userEmail != ''">
-				user_email, 
+				user_email,
 				</if>
 			</if>
 			user_info, head_img, create_time)
 		values(
-			#{userName}, #{userPassword}, 
+			#{userName}, #{userPassword},
 			<if test="userEmail != null">
 				<if test="userEmail != ''">
-				#{userEmail}, 
+				#{userEmail},
 				</if>
 			</if>
 			#{userInfo}, #{headImg, jdbcType=BLOB}, #{createTime, jdbcType=TIMESTAMP})
 	</insert>
-	
+
 	<insert id="insert3">
 		insert into sys_user(
-			user_name, user_password, user_email, 
+			user_name, user_password, user_email,
 			user_info, head_img, create_time)
 		values(
-			#{userName}, #{userPassword}, #{userEmail}, 
+			#{userName}, #{userPassword}, #{userEmail},
 			#{userInfo}, #{headImg, jdbcType=BLOB}, #{createTime, jdbcType=TIMESTAMP})
 		<selectKey keyColumn="id" resultType="long" keyProperty="id" order="AFTER">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
 	</insert>
-	
+
 	<!-- Oracle 的例子，查询多个列的时候需要 keyColumn -->
 	<insert id="insertOracle">
 		<selectKey keyColumn="id" resultType="long" keyProperty="id" order="BEFORE">
 			SELECT SEQ_USER.nextval from dual
 		</selectKey>
 		insert into sys_user(
-			id, user_name, user_password, user_email, 
+			id, user_name, user_password, user_email,
 			user_info, head_img, create_time)
 		values(
-			#{id}, #{userName}, #{userPassword}, #{userEmail}, 
+			#{id}, #{userName}, #{userPassword}, #{userEmail},
 			#{userInfo}, #{headImg, jdbcType=BLOB}, #{createTime, jdbcType=TIMESTAMP})
 	</insert>
-	
+
 	<update id="updateById">
-		update sys_user 
+		update sys_user
 		set user_name = #{userName},
 			user_password = #{userPassword},
 			user_email = #{userEmail},
@@ -175,15 +175,21 @@
 			create_time = #{createTime, jdbcType=TIMESTAMP}
 		where id = #{id}
 	</update>
-	
+
 	<delete id="deleteById">
 		delete from sys_user where id = #{id}
 	</delete>
-	
+
+	<!-- where 标签很干净哦，不会有一些莫名其妙的 where 1=1的写法
+	（1）如果标签内有返回值，那么 加一个where
+	（2）如果返回的字符是以and 或者 or开头的，则去除 and或者 or -->
+
+	<!-- bind 将一个变量绑定到上下文，定义一个变量供后面使用 -->
+<!-- OGNL 表达式	-->
 	<select id="selectByUser" resultType="tk.mybatis.simple.model.SysUser">
 		<bind name="print" value="@tk.mybatis.util.StringUtil@print(_parameter)"/>
-	    select id, 
-	    	user_name userName, 
+	    select id,
+	    	user_name userName,
 	        user_password userPassword,
 	        user_email userEmail,
 	        user_info userInfo,
@@ -199,10 +205,11 @@
 		    </if>
 	    </where>
 	</select>
-	
+
+	<!-- set的用法，（1）如果返回标签有元素则插入 set （2）如果返回的元素最后一个字符是逗号，那么去除逗号 -->
 	<update id="updateByIdSelective">
 	<bind name="print" value="@tk.mybatis.util.StringUtil@print(_parameter)"/>
-		update sys_user 
+		update sys_user
 		<set>
 			<if test="userName != null and userName != ''">
 			user_name = #{userName},
@@ -225,12 +232,12 @@
 			id = #{id},
 		</set>
 		where id = #{id}
-	</update>	
+	</update>
 
 	<!-- when …… when …… otherwise 相当于 if……else if…… else -->
 	<select id="selectByIdOrUserName" resultType="tk.mybatis.simple.model.SysUser">
-	    select id, 
-	    	user_name userName, 
+	    select id,
+	    	user_name userName,
 	        user_password userPassword,
 	        user_email userEmail,
 	        user_info userInfo,
@@ -250,10 +257,10 @@
 			</otherwise>
 		</choose>
 	</select>
-	
+
 	<select id="selectByIdList" resultType="tk.mybatis.simple.model.SysUser">
-	    select id, 
-	    	user_name userName, 
+	    select id,
+	    	user_name userName,
 	        user_password userPassword,
 	        user_email userEmail,
 	        user_info userInfo,
@@ -265,7 +272,7 @@
     		#{id}
     	</foreach>
 	</select>
-	
+
 	<insert id="insertList" useGeneratedKeys="true" keyProperty="id">
 		insert into sys_user(
 			user_name, user_password,user_email,
@@ -277,27 +284,27 @@
 			#{user.userInfo}, #{user.headImg, jdbcType=BLOB}, #{user.createTime, jdbcType=TIMESTAMP})
 		</foreach>
 	</insert>
-	
+
 	<update id="updateByMap">
-		update sys_user 
-		set 
+		update sys_user
+		set
 		<foreach collection="_parameter" item="val" index="key" separator=",">
 			${key} = #{val}
 		</foreach>
 		where id = #{id}
 	</update>
-	
+
 	<select id="selectUserAndRoleById" resultType="tk.mybatis.simple.model.SysUser">
-		select 
-		   	u.id, 
-		   	u.user_name userName, 
+		select
+		   	u.id,
+		   	u.user_name userName,
 		    u.user_password userPassword,
 		    u.user_email userEmail,
 		    u.user_info userInfo,
 		    u.head_img headImg,
 		    u.create_time createTime,
-			r.id "role.id", 
-			r.role_name "role.roleName", 
+			r.id "role.id",
+			r.role_name "role.roleName",
 			r.enabled "role.enabled",
 			r.create_by "role.createBy",
 			r.create_time "role.createTime"
@@ -306,18 +313,18 @@
 		inner join sys_role r on ur.role_id = r.id
 		where u.id = #{id}
 	</select>
-	
+
 	<select id="selectUserAndRoleById2" resultMap="userRoleMap">
-	    select 
-	    	u.id, 
-	    	u.user_name, 
+	    select
+	    	u.id,
+	    	u.user_name,
 	        u.user_password,
 	        u.user_email,
 	        u.user_info,
 	        u.head_img,
 	        u.create_time,
 			r.id role_id,
-			r.role_name role_role_name, 
+			r.role_name role_role_name,
 			r.enabled role_enabled,
 			r.create_by role_create_by,
 			r.create_time role_create_time
@@ -326,11 +333,11 @@
 		inner join sys_role r on ur.role_id = r.id
 	    where u.id = #{id}
 	</select>
-	
+
 	<select id="selectUserAndRoleByIdSelect" resultMap="userRoleMapSelect">
-	    select 
-	    	u.id, 
-	    	u.user_name, 
+	    select
+	    	u.id,
+	    	u.user_name,
 	        u.user_password,
 	        u.user_email,
 	        u.user_info,
@@ -341,18 +348,18 @@
 		inner join sys_user_role ur on u.id = ur.user_id
 	    where u.id = #{id}
 	</select>
-	
+
 	<select id="selectAllUserAndRoles" resultMap="userRoleListMap">
-	    select 
-	    	u.id, 
-	    	u.user_name, 
+	    select
+	    	u.id,
+	    	u.user_name,
 	        u.user_password,
 	        u.user_email,
 	        u.user_info,
 	        u.head_img,
 	        u.create_time,
 	        r.id role_id,
-			r.role_name role_role_name, 
+			r.role_name role_role_name,
 			r.enabled role_enabled,
 			r.create_by role_create_by,
 			r.create_time role_create_time,
@@ -365,11 +372,11 @@
 		inner join sys_role_privilege rp on rp.role_id = r.id
 		inner join sys_privilege p on p.id = rp.privilege_id
 	</select>
-	
+
 	<select id="selectAllUserAndRolesSelect" resultMap="userRoleListMapSelect">
-	    select 
-	    	u.id, 
-	    	u.user_name, 
+	    select
+	    	u.id,
+	    	u.user_name,
 	        u.user_password,
 	        u.user_email,
 	        u.user_info,
@@ -382,7 +389,7 @@
 	<!-- todo 这是什么写法呀，第一次见，长见识了 -->
 	<select id="selectUserById" statementType="CALLABLE" useCache="false">
 	    {call select_user_by_id(
-	    	#{id, mode=IN}, 
+	    	#{id, mode=IN},
 	    	#{userName, mode=OUT, jdbcType=VARCHAR},
 	    	#{userPassword, mode=OUT, jdbcType=VARCHAR},
 	    	#{userEmail, mode=OUT, jdbcType=VARCHAR},
@@ -391,7 +398,7 @@
 	    	#{createTime, mode=OUT, jdbcType=TIMESTAMP}
 	    )}
 	</select>
-	
+
 	<select id="selectUserPage" statementType="CALLABLE" useCache="false" resultMap="userMap">
 	    {call select_user_page(
 	    	#{userName, mode=IN},
@@ -400,10 +407,10 @@
 	    	#{total, mode=OUT, jdbcType=BIGINT}
 	    )}
 	</select>
-	
+
 	<insert id="insertUserAndRoles" statementType="CALLABLE">
 	    {call insert_user_and_roles(
-	    	#{user.id, mode=OUT, jdbcType=BIGINT}, 
+	    	#{user.id, mode=OUT, jdbcType=BIGINT},
 	    	#{user.userName, mode=IN},
 	    	#{user.userPassword, mode=IN},
 	    	#{user.userEmail, mode=IN},
@@ -413,7 +420,7 @@
 	    	#{roleIds, mode=IN}
 	    )}
 	</insert>
-	
+
 	<delete id="deleteUserById" statementType="CALLABLE">
 	    {call delete_user_by_id(#{id, mode=IN})}
 	</delete>
