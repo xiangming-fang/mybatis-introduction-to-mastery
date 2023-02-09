@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+// todo mapper 代理的简单模型
 public class MyMapperProxy<T> implements InvocationHandler {
     private Class<T> mapperInterface;
     private SqlSession sqlSession;
@@ -22,5 +23,10 @@ public class MyMapperProxy<T> implements InvocationHandler {
         List<T> list = sqlSession.selectList(mapperInterface.getCanonicalName() + "." + method.getName());
         //返回值也有很多情况
         return list;
+    }
+
+    public static void main(String[] args) {
+        // 获取类的全限定名
+        System.out.println(MyMapperProxy.class.getCanonicalName());
     }
 }

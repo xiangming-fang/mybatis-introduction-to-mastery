@@ -14,6 +14,7 @@ import org.apache.ibatis.session.RowBounds;
 import tk.mybatis.simple.model.SysPrivilege;
 import tk.mybatis.simple.provider.PrivilegeProvider;
 
+// mybatis 扩展的4种注解方式：@SelectProvider、@InsertProvider、@UpdateProvider、@DeleteProvider
 @CacheNamespace
 public interface PrivilegeMapper {
 

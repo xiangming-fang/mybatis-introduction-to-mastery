@@ -12,6 +12,7 @@ import tk.mybatis.simple.model.SysRole;
 import tk.mybatis.simple.plugin.PageRowBounds;
 import tk.mybatis.simple.type.Enabled;
 
+// mybatis 注解方式
 public class RoleMapperTest extends BaseMapperTest {
 
 	@Test

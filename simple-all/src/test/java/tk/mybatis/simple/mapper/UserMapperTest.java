@@ -122,7 +122,8 @@ public class UserMapperTest extends BaseMapperTest {
 			//正常情况下应该读入一张图片存到 byte 数组中
 			user.setHeadImg(new byte[]{1,2,3});
 			user.setCreateTime(new Date());
-			//将新建的对象插入数据库中，特别注意，这里的返回值 result 是执行的 SQL 影响的行数
+			//将新建的对象插入数据库中，
+			// todo 5、特别注意，这里的返回值 result 是执行的 SQL 影响的行数
 			int result = userMapper.insert(user);
 			//只插入 1 条数据
 			Assert.assertEquals(1, result);
@@ -163,7 +164,8 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+
+	// mybatis 动态sql
 	@Test
 	public void testInsert2Selective(){
 		SqlSession sqlSession = getSqlSession();
@@ -182,7 +184,7 @@ public class UserMapperTest extends BaseMapperTest {
 			Assert.assertEquals("test@mybatis.tk", user.getUserEmail());
 			
 		} finally {
-			sqlSession.rollback();
+			sqlSession.commit();
 			//不要忘记关闭 sqlSession
 			sqlSession.close();
 		}
@@ -251,7 +253,8 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+
+	// chapter 4：mybatis 动态sql
 	@Test
 	public void testSelectByUser(){
 		SqlSession sqlSession = getSqlSession();
@@ -273,7 +276,7 @@ public class UserMapperTest extends BaseMapperTest {
 			query.setUserEmail("test@mybatis.tk");
 			userList = userMapper.selectByUser(query);
 			//由于没有同时符合这两个条件的用户，查询结果数为 0
-			Assert.assertTrue(userList.size() == 0);
+			Assert.assertEquals(0, userList.size());
 		} finally {
 			//不要忘记关闭 sqlSession
 			sqlSession.close();
