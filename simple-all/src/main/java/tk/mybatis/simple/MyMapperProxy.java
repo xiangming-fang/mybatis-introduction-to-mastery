@@ -24,4 +24,9 @@ public class MyMapperProxy<T> implements InvocationHandler {
         //返回值也有很多情况
         return list;
     }
+
+    public static void main(String[] args) {
+        // 获取类的全限定名
+        System.out.println(MyMapperProxy.class.getCanonicalName());
+    }
 }
