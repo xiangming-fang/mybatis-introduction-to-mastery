@@ -13,19 +13,19 @@
 		<result property="headImg" column="head_img" jdbcType="BLOB"/>
 		<result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
 	</resultMap>
-	
+
 	<resultMap id="userRoleMap" extends="userMap" type="tk.mybatis.simple.model.SysUser">
 		<association property="role" columnPrefix="role_" resultMap="tk.mybatis.simple.mapper.RoleMapper.roleMap"/>
 	</resultMap>
-	
+
 	<resultMap id="userRoleMapSelect" extends="userMap" type="tk.mybatis.simple.model.SysUser">
-		<association property="role" 
+		<association property="role"
 					 fetchType="lazy"
-					 select="tk.mybatis.simple.mapper.RoleMapper.selectRoleById" 
+					 select="tk.mybatis.simple.mapper.RoleMapper.selectRoleById"
 					 column="{id=role_id}"/>
 	</resultMap>
-	
-	<!-- 
+
+	<!--
 	<resultMap id="userRoleListMap" extends="userMap" type="tk.mybatis.simple.model.SysUser">
 		<id property="id" column="id"/>
 		<result property="userName" column="user_name"/>
@@ -43,26 +43,26 @@
 		</collection>
 	</resultMap>
 	 -->
-	 
+
 	<resultMap id="userRoleListMap" extends="userMap" type="tk.mybatis.simple.model.SysUser">
-		<collection property="roleList" columnPrefix="role_" 
+		<collection property="roleList" columnPrefix="role_"
 					resultMap="tk.mybatis.simple.mapper.RoleMapper.rolePrivilegeListMap"/>
 	</resultMap>
-	 
+
 	<resultMap id="userRoleListMapSelect" extends="userMap" type="tk.mybatis.simple.model.SysUser">
 		<collection property="roleList"
 					fetchType="lazy"
 					select="tk.mybatis.simple.mapper.RoleMapper.selectRoleByUserId"
 					column="{userId=id}"/>
 	</resultMap>
-	 
+
 	<select id="selectById" resultMap="userMap">
 		select * from sys_user where id = #{id}
 	</select>
-	
+
 	<select id="selectAll" resultType="tk.mybatis.simple.model.SysUser">
-	    select id, 
-	    	user_name userName, 
+	    select id,
+	    	user_name userName,
 	        user_password userPassword,
 	        user_email userEmail,
 	        user_info userInfo,
@@ -70,26 +70,27 @@
 	        create_time createTime
 	    from sys_user
 	</select>
-	
+
+	<!-- todo 5、再次验证，别名不区分大小写 -->
 	<select id="selectRolesByUserId" resultType="tk.mybatis.simple.model.SysRole">
-	    select 
-			r.id, 
-			r.role_name roleName, 
+	    select
+			r.id,
+			r.role_name roleName,
 			r.enabled,
 			r.create_by createBy,
 			r.create_time createTime,
-			u.user_name as "user.userName",
-			u.user_email as "user.userEmail"
+			u.user_name as "USER.userName",
+			u.user_email as "USER.userEmail"
 		from sys_user u
 		inner join sys_user_role ur on u.id = ur.user_id
 		inner join sys_role r on ur.role_id = r.id
 	    where u.id = #{userId}
 	</select>
-	
+
 	<select id="selectRolesByUserIdAndRoleEnabled" resultType="tk.mybatis.simple.model.SysRole">
-	    select 
-			r.id, 
-			r.role_name roleName, 
+	    select
+			r.id,
+			r.role_name roleName,
 			r.enabled,
 			r.create_by createBy,
 			r.create_time createTime
@@ -98,11 +99,11 @@
 		inner join sys_role r on ur.role_id = r.id
 	    where u.id = #{userId} and r.enabled = #{enabled}
 	</select>
-	
+
 	<select id="selectRolesByUserAndRole" resultType="tk.mybatis.simple.model.SysRole">
-	    select 
-			r.id, 
-			r.role_name roleName, 
+	    select
+			r.id,
+			r.role_name roleName,
 			r.enabled,
 			r.create_by createBy,
 			r.create_time createTime
@@ -114,32 +115,32 @@
 	
 	<insert id="insert">
 		insert into sys_user(
-			user_name, user_password, user_email, 
+			user_name, user_password, user_email,
 			user_info, head_img, create_time)
 		values(
-			#{userName}, #{userPassword}, #{userEmail}, 
+			#{userName}, #{userPassword}, #{userEmail},
 			#{userInfo}, #{headImg, jdbcType=BLOB}, #{createTime, jdbcType=TIMESTAMP})
 	</insert>
-	
+
 	<insert id="insert2" useGeneratedKeys="true" keyProperty="id">
 		insert into sys_user(
-			user_name, user_password, 
+			user_name, user_password,
 			<if test="userEmail != null">
 				<if test="userEmail != ''">
-				user_email, 
+				user_email,
 				</if>
 			</if>
 			user_info, head_img, create_time)
 		values(
-			#{userName}, #{userPassword}, 
+			#{userName}, #{userPassword},
 			<if test="userEmail != null">
 				<if test="userEmail != ''">
-				#{userEmail}, 
+				#{userEmail},
 				</if>
 			</if>
 			#{userInfo}, #{headImg, jdbcType=BLOB}, #{createTime, jdbcType=TIMESTAMP})
 	</insert>
-	
+
 	<insert id="insert3">
 		insert into sys_user(
 			user_name, user_password, user_email, 
