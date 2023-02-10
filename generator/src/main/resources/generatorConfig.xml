@@ -6,13 +6,15 @@
 <generatorConfiguration>
 
     <!-- 1、指定外部的属性元素-->
-<!--    <properties/>-->
+    <properties resource="basic.properties"/>
 
     <!-- 2、驱动路径 必须填写绝对路径 -->
-    <classPathEntry location="E:\study\mybatis\generator\src\main\resources\mysql-connector-java-8.0.28.jar"/>
+    <classPathEntry location="${mysql_driver_path}"/>
 
     <!-- 3、指定生成一组对象的环境 -->
-    <context id="MySqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+    <!-- targetRuntime == MyBatis3 会生成 Example 相关信息-->
+    <!-- targetRuntime == MyBatis3Simple 不会生成Example 相关信息-->
+    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
 
         <!-- 3.1 指定分隔符，java 文件编码-->
         <property name="beginningDelimiter" value="`"/>
@@ -34,10 +36,10 @@
         </commentGenerator>
 
         <!-- 3.4 连接数据库的信息，必须，并且只能有一个 -->
-        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/mybatis"
-                        userId="root"
-                        password="123456">
+        <jdbcConnection driverClass="${driver_class}"
+                        connectionURL="${connectionUrl}"
+                        userId="${userId}"
+                        password="${password}">
         </jdbcConnection>
 
         <!-- 3.5 jdbc 数据类型和 java 数据类型的映射，一般情况适用默认的就好，不需要配置这个标签 -->
@@ -49,7 +51,7 @@
         <!-- 3.6 控制生成的实体类存放路径 -->
         <!-- targetProject ==> 目标项目的绝对路径或者相对路径 -->
         <!-- targetPackage ==> 存放实体类的目标包路径 -->
-        <javaModelGenerator targetPackage="tk.mybatis.generator.pojo" targetProject="E:\study\mybatis\generator\src\main\java">
+        <javaModelGenerator targetPackage="${pojoClassPackage}" targetProject="${classTargetProject}">
             <property name="trimStrings" value="true" />
             <!-- 所有实体类的基类 -->
             <property name="rootClass" value="tk.mybatis.generator.pojo.BasePO" />
@@ -58,13 +60,13 @@
         <!-- 3.7 生成的mapper xml 文件存放路径 -->
         <!-- targetProject ==> 目标项目的绝对路径或者相对路径 -->
         <!-- targetPackage ==> 存放xml具体的文件夹路径 -->
-        <sqlMapGenerator targetPackage="generator"  targetProject="E:\study\mybatis\generator\src\main\resources"/>
+        <sqlMapGenerator targetPackage="${xmlResourceFolder}"  targetProject="${resourceTargetProject}"/>
 
         <!-- 3.8 生成 mapper 接口 的存放路径 -->
         <!-- targetProject ==> 目标项目的绝对路径或者相对路径 -->
         <!-- targetPackage ==> 存放接口的具体包名路径 -->
         <!-- type ==> 客户端代码生成器，是基于xml 还是 注解，或者 混用-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="tk.mybatis.generator.dao"  targetProject="E:\study\mybatis\generator\src\main\java"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${daoClassPackage}"  targetProject="${classTargetProject}"/>
 
         <!-- 3.9 最重要的注解，要生成代码的表 % 是通配符，指定库下的所有表-->
         <table schema="mybatis" tableName="country">
