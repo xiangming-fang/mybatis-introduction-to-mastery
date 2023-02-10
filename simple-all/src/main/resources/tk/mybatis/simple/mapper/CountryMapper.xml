@@ -233,4 +233,8 @@
 	    	#{list2, mode=OUT,jdbcType=CURSOR,javaType=ResultSet,resultMap=BaseResultMap}
 	    )}
 	</select>
+
+	<select id="selectUserById" statementType="CALLABLE" useCache="false">
+		{call select_user_by_id(#{id}) }
+	</select>
 </mapper>

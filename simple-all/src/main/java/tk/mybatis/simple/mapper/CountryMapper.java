@@ -83,4 +83,6 @@ public interface CountryMapper {
 	 * @return
 	 */
 	Object selectCountries(Map<String, Object> params);
+
+	Object selectUserById(@Param("id") Long id);
 }
