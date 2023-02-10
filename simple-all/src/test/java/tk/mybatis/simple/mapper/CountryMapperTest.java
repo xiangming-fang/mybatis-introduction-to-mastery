@@ -89,6 +89,8 @@ public class CountryMapperTest extends BaseMapperTest {
 			//在把符合条件的结果输出查看
 			printCountryList(countryMapper.selectByExample(example));
 		} finally {
+			// 不显示的commit，就表示rollback
+			sqlSession.commit();
 			// 不要忘记关闭 sqlSession
 			sqlSession.close();
 		}
@@ -112,18 +114,21 @@ public class CountryMapperTest extends BaseMapperTest {
 			//使用 countByExample 查询符合条件的数量，因为删除了，所以这里应该是 0
 			Assert.assertEquals(0, countryMapper.countByExample(example));
 		} finally {
+			sqlSession.commit();
 			// 不要忘记关闭 sqlSession
 			sqlSession.close();
 		}
 	}
-	
+
+
+	// todo 这是存储过程
 	@Test
     public void testMapperWithStartPage3() {
         SqlSession sqlSession = getSqlSession();
         CountryMapper countryMapper = sqlSession.getMapper(CountryMapper.class);
         try {
             //获取第1页，10条内容，默认查询总数count
-            Map<String, Object> params = new HashMap<String, Object>();
+            Map<String, Object> params = new HashMap<>();
             countryMapper.selectCountries(params);
             List<Country> list1 = (List<Country>) params.get("list1");
             List<Country> list2 = (List<Country>) params.get("list2");
