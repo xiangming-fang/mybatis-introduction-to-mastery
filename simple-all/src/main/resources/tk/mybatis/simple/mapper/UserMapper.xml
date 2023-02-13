@@ -386,7 +386,8 @@
 		where u.id = #{id}
 	</select>
 
-	<!-- todo 这是什么写法呀，第一次见，长见识了 -->
+	<!-- 这是什么写法呀，第一次见，长见识了 -->
+	<!-- 这是存储过程的写法-->
 	<select id="selectUserById" statementType="CALLABLE" useCache="false">
 	    {call select_user_by_id(
 	    	#{id, mode=IN},

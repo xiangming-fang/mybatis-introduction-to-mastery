@@ -494,7 +494,8 @@ public class UserMapperTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+
+	// todo 存储过程查询用户信息
 	@Test
 	public void testSelectUserById(){
 		//获取 sqlSession
@@ -556,7 +557,7 @@ public class UserMapperTest extends BaseMapperTest {
 			Assert.assertNotNull(user.getId());
 			Assert.assertNotNull(user.getCreateTime());
 			//可以执行下面的 commit 后查看数据库中的数据
-			//sqlSession.commit();
+			sqlSession.commit();
 			//测试删除刚刚插入的数据
 			userMapper.deleteUserById(user.getId());
 		} finally {
