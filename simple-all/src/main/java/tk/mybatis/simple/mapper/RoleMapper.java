@@ -17,6 +17,8 @@ import org.apache.ibatis.session.RowBounds;
 import tk.mybatis.simple.model.SysRole;
 
 // mybatis 4种基本注解@Select、@Insert、@Update、@Delete 注解方式的使用
+// 注解方式（mybatis有两种方式注解和xml方式）的方法开启二级缓存
+// @CacheNamespaceRef 参照缓存，mapper接口和mapper文件的命名空间是同一个，所以缓存会报已经存在
 @CacheNamespaceRef(RoleMapper.class)
 public interface RoleMapper {
 	

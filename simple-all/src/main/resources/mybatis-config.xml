@@ -5,6 +5,7 @@
 <configuration>
 	<settings>
 	    <setting name="logImpl" value="LOG4J"/>
+        <!-- mybatis 开启二级缓存 功能，默认就是true-->
 	    <setting name="cacheEnabled" value="true"/>
 	    <setting name="mapUnderscoreToCamelCase" value="true"/>
 	    <setting name="aggressiveLazyLoading" value="false"/>
@@ -13,11 +14,18 @@
     <typeAliases>
         <package name="tk.mybatis.simple.model"/>
     </typeAliases>
-    
+
+    <!-- 枚举处理类型，通过javaType 设置待处理的枚举类型 -->
+    <!-- 通过handler 设置处理美剧类型的处理器 -->
 	<typeHandlers>
-		<typeHandler 
-			javaType="tk.mybatis.simple.type.Enabled" 
-			handler="tk.mybatis.simple.type.EnabledTypeHandler"/>
+        <!-- 自定义类型处理器 -->
+<!--		<typeHandler-->
+<!--			javaType="tk.mybatis.simple.type.Enabled"-->
+<!--			handler="tk.mybatis.simple.type.EnabledTypeHandler"/>-->
+        <!-- 默认的类型 处理器，要结合每个类型枚举的索引，不建议默认这样子 -->
+        <typeHandler
+                javaType="tk.mybatis.simple.type.Enabled"
+                handler="org.apache.ibatis.type.EnumOrdinalTypeHandler"/>
 	</typeHandlers>
 	
 	<plugins>

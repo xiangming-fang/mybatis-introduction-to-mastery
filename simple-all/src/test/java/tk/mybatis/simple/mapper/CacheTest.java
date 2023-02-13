@@ -8,7 +8,8 @@ import tk.mybatis.simple.model.SysRole;
 import tk.mybatis.simple.model.SysUser;
 
 public class CacheTest extends BaseMapperTest {
-	
+
+	// 测试一级缓存
 	@Test
 	public void testL1Cache(){
 		//获取 sqlSession
@@ -21,7 +22,7 @@ public class CacheTest extends BaseMapperTest {
 			user1 = userMapper.selectById(1l);
 			//对当前获取的对象重新赋值
 			user1.setUserName("New Name");
-			//再次查询获取 id 相同的用户
+			//再次查询获取 id 相同的用户，走的是 mybatis 以及缓存，也就是本地缓存，这里不走数据库
 			SysUser user2 = userMapper.selectById(1l);
 			//虽然我们没有更新数据库，但是这个用户名和我们 user1 重新赋值的名字相同了
 			Assert.assertEquals("New Name", user2.getUserName());
@@ -54,7 +55,8 @@ public class CacheTest extends BaseMapperTest {
 			sqlSession.close();
 		}
 	}
-	
+
+	// 测试二级缓存
 	@Test
 	public void testL2Cache(){
 		//获取 sqlSession
@@ -72,9 +74,10 @@ public class CacheTest extends BaseMapperTest {
 			//虽然我们没有更新数据库，但是这个用户名和我们 role1 重新赋值的名字相同了
 			Assert.assertEquals("New Name", role2.getRoleName());
 			//不仅如何，role2 和 role1 完全就是同一个实例
-			Assert.assertNotSame(role1, role2);
+			Assert.assertEquals(role1, role2);
 		} finally {
-			//关闭当前的 sqlSession
+			// 关闭当前的 sqlSession
+			// 当前sqlSession的缓存会变成二级缓存
 			sqlSession.close();
 		}
 		System.out.println("开启新的 sqlSession");
@@ -84,6 +87,7 @@ public class CacheTest extends BaseMapperTest {
 			//获取 RoleMapper 接口
 			RoleMapper roleMapper = sqlSession.getMapper(RoleMapper.class);
 			//调用 selectById 方法，查询 id = 1 的用户
+			// 走的二级缓存，不会走数据库
 			SysRole role2 = roleMapper.selectById(1l);
 			//第二个 session 获取的用户名仍然是 admin
 			Assert.assertEquals("New Name", role2.getRoleName());
