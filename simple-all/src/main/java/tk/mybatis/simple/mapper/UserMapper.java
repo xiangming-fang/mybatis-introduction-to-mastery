@@ -226,5 +226,5 @@ public interface UserMapper {
     List<Map<String, Object>> selectAllUsers();
 
     // 每一个列名为key，一行为一个map
-    Map<String, Object> selectMapById();
+    Map<String, Object> selectMapById(@Param("id") Long id);
 }

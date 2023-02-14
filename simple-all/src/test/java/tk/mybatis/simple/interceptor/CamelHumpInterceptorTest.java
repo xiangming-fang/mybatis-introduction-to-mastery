@@ -33,7 +33,7 @@ public class CamelHumpInterceptorTest extends BaseMapperTest {
     public void mapResultTest() {
         SqlSession sqlSession = getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        Map<String, Object> map = userMapper.selectMapById();
+        Map<String, Object> map = userMapper.selectMapById(1L);
         System.out.println(map);
         sqlSession.commit();
         sqlSession.close();
