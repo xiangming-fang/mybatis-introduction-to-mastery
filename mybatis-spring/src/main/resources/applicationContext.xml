@@ -36,6 +36,8 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="addToConfig" value="true"/>
         <property name="basePackage" value="tk.mybatis.**.mapper"/>
+<!--        扫描mapper包下的接口，只有这个接口上有这个指定注释才会被扫描进去 -->
+<!--        <property name="annotationClass" value="XXX"/>-->
     </bean>
 
     <aop:aspectj-autoproxy/>
