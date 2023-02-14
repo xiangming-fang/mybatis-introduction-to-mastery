@@ -1,6 +1,7 @@
 package tk.mybatis.web.mapper;
 
 import org.apache.ibatis.session.RowBounds;
+import tk.mybatis.web.annotation.SeeMapper;
 import tk.mybatis.web.model.SysDict;
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * @author liuzh
  */
+@SeeMapper
 public interface DictMapper {
 
     /**

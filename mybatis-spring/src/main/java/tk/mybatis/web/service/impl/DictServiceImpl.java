@@ -7,6 +7,7 @@ import tk.mybatis.web.mapper.DictMapper;
 import tk.mybatis.web.model.SysDict;
 import tk.mybatis.web.service.DictService;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ import java.util.List;
 @Service
 public class DictServiceImpl implements DictService {
 
-    @Autowired
+    @Resource
     private DictMapper dictMapper;
 
     @Override
