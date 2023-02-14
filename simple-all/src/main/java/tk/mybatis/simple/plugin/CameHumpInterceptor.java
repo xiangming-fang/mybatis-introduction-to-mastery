@@ -24,10 +24,21 @@ import org.apache.ibatis.plugin.Signature;
 )
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CameHumpInterceptor implements Interceptor {
-    
+
+    /**
+     * @see org.apache.ibatis.executor.resultset.ResultSetHandler#handleResultSets(Statement)
+     * {@link org.apache.ibatis.executor.resultset.ResultSetHandler#handleResultSets(Statement)}
+     * @param invocation
+     * @return
+     * @throws Throwable
+     */
 	@Override
     public Object intercept(Invocation invocation) throws Throwable {
-        //先执行得到结果，再对结果进行处理
+        // 先执行得到结果，再对结果进行处理
+        // 为什么我们这里需要强制性转换成List?
+        // 因为我们ResultSetHandler这个接口的 handleResultSets 方法返回的就是List
+        // 也就是说任何类型在mybatis刚从数据库取得结果集的时候就是集合的形式。
+        // 然后看集合大小，如果只有一个，那么取第一个结果，如果很多个那就是list这样的形式
         List<Object> list = (List<Object>) invocation.proceed();
         for(Object object : list){
         	//如果结果是 Map 类型，就对 Map 的 Key 进行转换

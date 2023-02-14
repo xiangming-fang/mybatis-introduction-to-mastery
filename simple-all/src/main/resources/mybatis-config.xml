@@ -32,7 +32,8 @@
 		<plugin interceptor="tk.mybatis.simple.plugin.PageInterceptor">
 			<property name="dialect" value="tk.mybatis.simple.plugin.MySqlDialect"/>
 		</plugin>
-		<!-- <plugin interceptor="tk.mybatis.simple.plugin.CameHumpInterceptor"/> -->
+        <!-- 返回值是map的，将map的key转成 underScoreToCamlCase -->
+		 <plugin interceptor="tk.mybatis.simple.plugin.CameHumpInterceptor"/>
 	</plugins>
 
     <environments default="development">

@@ -425,4 +425,13 @@
 	<delete id="deleteUserById" statementType="CALLABLE">
 	    {call delete_user_by_id(#{id, mode=IN})}
 	</delete>
+
+	<select id="selectAllUsers" resultType="map">
+		select * from sys_user
+	</select>
+
+	<select id="selectMapById" resultType="map">
+		select * from sys_user where id = 1
+	</select>
+
 </mapper>

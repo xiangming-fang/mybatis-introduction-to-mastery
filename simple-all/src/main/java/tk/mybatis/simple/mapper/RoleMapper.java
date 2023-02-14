@@ -19,6 +19,8 @@ import tk.mybatis.simple.model.SysRole;
 // mybatis 4种基本注解@Select、@Insert、@Update、@Delete 注解方式的使用
 // 注解方式（mybatis有两种方式注解和xml方式）的方法开启二级缓存
 // @CacheNamespaceRef 参照缓存，mapper接口和mapper文件的命名空间是同一个，所以缓存会报已经存在
+// 参照缓存主要是用来处理脏数据的。
+// 如果多张表对应一个业务主体，那么应该这几张表共用一个二级缓存的命名空间。
 @CacheNamespaceRef(RoleMapper.class)
 public interface RoleMapper {
 	

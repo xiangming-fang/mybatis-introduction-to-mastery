@@ -3,6 +3,7 @@ package tk.mybatis.simple.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Param;
 
 import tk.mybatis.simple.model.SysRole;
@@ -221,4 +222,11 @@ public interface UserMapper {
 	 * @return
 	 */
 	int deleteUserById(Long id);
+
+	// 每一个列名为key，一行为一个map
+	// 多行为一个 list<map>
+	List<Map<String,Object>> selectAllUsers();
+
+	// 每一个列名为key，一行为一个map
+	Map<String,Object> selectMapById();
 }
