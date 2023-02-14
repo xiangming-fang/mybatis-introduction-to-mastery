@@ -7,7 +7,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <java.version>1.6</java.version>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -15,18 +15,18 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <version>4.6</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
-            <version>3.4.1</version>
+            <version>3.5.6</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.38</version>
+            <version>8.0.32</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -52,6 +52,7 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+
         <!--支持 JSP-->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
@@ -59,7 +60,8 @@
             <version>2.1</version>
             <scope>provided</scope>
         </dependency>
-        <!--支持 JSTL-->
+
+        <!--支持 JSTL，jsp 标准标签库 -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -71,33 +73,39 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+
         <!--Spring JDBC-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
         </dependency>
+
         <!--Spring 事务-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
         </dependency>
+
         <!--Spring 面向切面编程-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
         </dependency>
+
         <!--spring-aop 依赖-->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.8.2</version>
         </dependency>
+
         <!--JSR 250 公共注解-->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <version>1.2</version>
         </dependency>
+
         <!--Java 事务接口-->
         <dependency>
             <groupId>javax.transaction</groupId>
@@ -110,18 +118,24 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
         </dependency>
+
         <!--Spring MVC-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
+
         <!--spring mvc-json依赖-->
+        <!-- spring mvc 转换为 json 时候要用-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.8.11</version>
         </dependency>
 
+        <!-- spring 集成 mybatis-->
+        <!-- 由于spring 3.0 在mybatis 3.0时期已经停止更新了 -->
+        <!-- 所以其实mybatis-spring 是mybatis靠向spring的一个过程 -->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
@@ -130,6 +144,7 @@
     </dependencies>
 
     <dependencyManagement>
+        <!-- spring 项目清单，用于管理spring组件的依赖版本，有了这个spring 清单之后，在使用spring组件的时候就不必写版本号了-->
         <dependencies>
             <dependency>
                 <groupId>org.springframework</groupId>

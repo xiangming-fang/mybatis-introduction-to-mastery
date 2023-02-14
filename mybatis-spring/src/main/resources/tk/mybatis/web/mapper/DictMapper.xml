@@ -8,7 +8,8 @@
         where id = #{id}
     </select>
 
-    <select id="selectBySysDict" resultType="tk.mybatis.web.model.SysDict">
+    <!-- 因为设置了别名，所以这里直接用 SysDict即可-->
+    <select id="selectBySysDict" resultType="SysDict">
         select * from sys_dict
         <where>
             <if test="id != null">
