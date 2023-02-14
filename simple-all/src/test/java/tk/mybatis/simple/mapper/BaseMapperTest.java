@@ -21,6 +21,7 @@ public class BaseMapperTest {
         try {
             Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
+            sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader,"product");
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();

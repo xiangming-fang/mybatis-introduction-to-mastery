@@ -18,7 +18,7 @@ import java.util.Properties;
 
 /**
  * Mybatis - 通用分页拦截器
- *
+ * @see org.apache.ibatis.executor.Executor#query(MappedStatement, Object, RowBounds, ResultHandler)
  * @author liuzh
  * @version 1.0.0
  */
@@ -192,6 +192,8 @@ public class PageInterceptor implements Interceptor {
 
     @Override
     public void setProperties(Properties properties) {
+        // 在mybatis-config.xml里设置的方言类型，在这里使用
+        // 获得到的是方言的全限定名
         String dialectClass = properties.getProperty("dialect");
         try {
             dialect = (Dialect) Class.forName(dialectClass).newInstance();
@@ -201,7 +203,8 @@ public class PageInterceptor implements Interceptor {
         }
         dialect.setProperties(properties);
         try {
-            //反射获取 BoundSql 中的 additionalParameters 属性
+            // 反射获取 BoundSql 中的 additionalParameters 属性
+            // todo 这个属性是干嘛用的呢？
             additionalParametersField = BoundSql.class.getDeclaredField(
                     "additionalParameters");
             additionalParametersField.setAccessible(true);

@@ -9,11 +9,12 @@ import java.util.Properties;
 
 /**
  * 数据库方言，针对不同数据库进行实现
- *
+ * 接口定义行为、实现类实现具体行为
  * @author liuzh
  */
 @SuppressWarnings("rawtypes")
 public interface Dialect {
+
     /**
      * 跳过 count 和 分页查询
      *
