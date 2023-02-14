@@ -31,8 +31,12 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.32</version>
         </dependency>
 
+        <!-- 这个就是 springboot 集成 mybatis 的重要依赖-->
+        <!-- 不管是 spring 集成 mybatis 还是 springboot集成 mybatis 都是mybatis主动往spring/springboot靠的-->
+        <!-- 而不是 spring/springboot 去主动集成的 -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
