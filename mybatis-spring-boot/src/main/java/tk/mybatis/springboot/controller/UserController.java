@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tk.mybatis.simple.model.SysUser;
 import tk.mybatis.springboot.service.UserService;
+import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
 
 import java.util.List;
 
