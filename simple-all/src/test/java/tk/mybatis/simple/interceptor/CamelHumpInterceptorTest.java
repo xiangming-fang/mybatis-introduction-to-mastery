@@ -29,6 +29,7 @@ public class CamelHumpInterceptorTest extends BaseMapperTest {
     }
 
     // 直接返回 Map 也可以生效
+    // 原因见插件注释
     @Test
     public void mapResultTest() {
         SqlSession sqlSession = getSqlSession();
