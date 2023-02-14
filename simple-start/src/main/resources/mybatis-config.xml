@@ -6,8 +6,8 @@
     <settings>
         <setting name="logImpl" value="LOG4J"/>
     </settings>
-    
-     <typeAliases>
+
+    <typeAliases>
         <package name="tk.mybatis.simple.model"/>
     </typeAliases>
 

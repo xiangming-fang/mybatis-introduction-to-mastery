@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-	<classPathEntry location="F:\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar"/>
-	
+    <classPathEntry location="F:\.m2\repository\mysql\mysql-connector-java\5.1.38\mysql-connector-java-5.1.38.jar"/>
+
     <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
         <property name="javaFileEncoding" value="UTF-8"/>
 
@@ -21,12 +21,13 @@
         </jdbcConnection>
 
         <javaModelGenerator targetPackage="tk.mybatis.simple.model" targetProject="simple\src\main\java">
-            <property name="trimStrings" value="true" />
+            <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="tk.mybatis.simple.mapper"  targetProject="simple\src\main\resources"/>
+        <sqlMapGenerator targetPackage="tk.mybatis.simple.mapper" targetProject="simple\src\main\resources"/>
 
-        <javaClientGenerator type="XMLMAPPER" targetPackage="tk.mybatis.simple.mapper"  targetProject="simple\src\main\java"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="tk.mybatis.simple.mapper"
+                             targetProject="simple\src\main\java"/>
 
         <table tableName="country">
             <generatedKey column="id" sqlStatement="MySql"/>

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF8" pageEncoding="UTF8"%>
+<%@ page language="java" contentType="text/html; charset=UTF8" pageEncoding="UTF8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -18,7 +18,7 @@
         <th>类别名</th>
         <th>字典名</th>
         <th>字典值</th>
-        <th> 操作  [<a href="${path}/dicts/add">新增</a>]</th>
+        <th> 操作 [<a href="${path}/dicts/add">新增</a>]</th>
     </tr>
     <c:forEach items="${dicts}" var="dict">
         <tr id="dict-${dict.id}">
@@ -33,9 +33,9 @@
     </c:forEach>
 </table>
 <script>
-    function deleteById(id, label){
+    function deleteById(id, label) {
         var r = confirm('您确定要删除“' + label + '”吗？');
-        if(r){
+        if (r) {
             $.ajax({
                 url: '${path}/dicts/delete',
                 data: {
@@ -43,8 +43,8 @@
                 },
                 dataType: 'json',
                 type: 'POST',
-                success: function(data){
-                    if(data.success){
+                success: function (data) {
+                    if (data.success) {
                         $('#dict-' + id).remove();
                     } else {
                         alert(data.msg);

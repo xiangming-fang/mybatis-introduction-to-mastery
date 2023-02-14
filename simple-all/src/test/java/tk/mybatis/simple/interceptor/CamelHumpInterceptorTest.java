@@ -19,7 +19,7 @@ public class CamelHumpInterceptorTest extends BaseMapperTest {
     // 测试map的key转驼峰式插件
     // List<Map> 成功生效
     @Test
-    public void camelInterceptorTest(){
+    public void camelInterceptorTest() {
         SqlSession sqlSession = getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         List<Map<String, Object>> res = userMapper.selectAllUsers();
@@ -30,7 +30,7 @@ public class CamelHumpInterceptorTest extends BaseMapperTest {
 
     // 直接返回 Map 也可以生效
     @Test
-    public void mapResultTest(){
+    public void mapResultTest() {
         SqlSession sqlSession = getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         Map<String, Object> map = userMapper.selectMapById();

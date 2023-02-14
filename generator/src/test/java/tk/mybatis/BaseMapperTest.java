@@ -14,21 +14,21 @@ import java.io.Reader;
  */
 public class BaseMapperTest {
 
-	private static SqlSessionFactory sqlSessionFactory;
-	
-	@BeforeClass
-	public static void init(){
-		try {
+    private static SqlSessionFactory sqlSessionFactory;
+
+    @BeforeClass
+    public static void init() {
+        try {
             Reader reader = Resources.getResourceAsReader("mybatis-config.xml");
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
             reader.close();
         } catch (IOException e) {
-        	e.printStackTrace();
+            e.printStackTrace();
         }
-	}
-	
-	public SqlSession getSqlSession(){
-		return sqlSessionFactory.openSession();
-	}
-	
+    }
+
+    public SqlSession getSqlSession() {
+        return sqlSessionFactory.openSession();
+    }
+
 }

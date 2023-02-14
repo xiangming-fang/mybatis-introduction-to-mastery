@@ -6,13 +6,13 @@
 
     <properties resource="basic.properties"/>
 
-	<settings>
-	    <setting name="logImpl" value="LOG4J"/>
-	    <setting name="cacheEnabled" value="true"/>
-	    <setting name="mapUnderscoreToCamelCase" value="true"/>
-	    <setting name="aggressiveLazyLoading" value="false"/>
-	</settings>
-    
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
     <typeAliases>
         <package name="tk.mybatis.generator.pojo"/>
     </typeAliases>
@@ -35,6 +35,6 @@
     <mappers>
         <package name="tk.mybatis.generator.dao"/>
     </mappers>
-    
-    
+
+
 </configuration>

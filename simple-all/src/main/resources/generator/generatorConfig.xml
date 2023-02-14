@@ -9,7 +9,8 @@
     <properties/>
 
     <!-- 2、驱动路径 -->
-    <classPathEntry location="D:\apache-maven-3.8.6\repository\mysql\mysql-connector-java\8.0.28\mysql-connector-java-8.0.28.jar"/>
+    <classPathEntry
+            location="D:\apache-maven-3.8.6\repository\mysql\mysql-connector-java\8.0.28\mysql-connector-java-8.0.28.jar"/>
 
     <!-- 3、指定生成一组对象的环境 -->
     <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
@@ -50,21 +51,22 @@
         <!-- targetProject ==> 目标项目的绝对路径或者相对路径 -->
         <!-- targetPackage ==> 存放实体类的目标包路径 -->
         <javaModelGenerator targetPackage="test.model" targetProject="src\main\java">
-            <property name="trimStrings" value="true" />
+            <property name="trimStrings" value="true"/>
             <!-- 所有实体类的基类 -->
-            <property name="rootClass" value="tk.mybatis.simple.model.BaseEntity" />
-        </javaModelGenerator>l
+            <property name="rootClass" value="tk.mybatis.simple.model.BaseEntity"/>
+        </javaModelGenerator>
+        l
 
         <!-- 3.7 生成的mapper xml 文件存放路径 -->
         <!-- targetProject ==> 目标项目的绝对路径或者相对路径 -->
         <!-- targetPackage ==> 存放xml具体的文件夹路径 -->
-        <sqlMapGenerator targetPackage="test.xml"  targetProject="src\main\resources"/>
+        <sqlMapGenerator targetPackage="test.xml" targetProject="src\main\resources"/>
 
         <!-- 3.8 生成 mapper 接口 的存放路径 -->
         <!-- targetProject ==> 目标项目的绝对路径或者相对路径 -->
         <!-- targetPackage ==> 存放接口的具体包名路径 -->
         <!-- type ==> 客户端代码生成器，是基于xml 还是 注解，或者 混用-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="test.dao"  targetProject="src\main\java"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="test.dao" targetProject="src\main\java"/>
 
         <!-- 3.9 最重要的注解，要生成代码的表 % 是通配符，指定库下的所有表-->
         <table tableName="%">

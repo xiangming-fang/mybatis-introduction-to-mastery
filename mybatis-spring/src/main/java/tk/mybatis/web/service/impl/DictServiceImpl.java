@@ -25,7 +25,7 @@ public class DictServiceImpl implements DictService {
 
     public List<SysDict> findBySysDict(SysDict sysDict, Integer offset, Integer limit) {
         RowBounds rowBounds = RowBounds.DEFAULT;
-        if(offset != null && limit != null){
+        if (offset != null && limit != null) {
             rowBounds = new RowBounds(offset, limit);
         }
         return dictMapper.selectBySysDict(sysDict, rowBounds);
@@ -33,7 +33,7 @@ public class DictServiceImpl implements DictService {
 
     @Override
     public boolean saveOrUpdate(SysDict sysDict) {
-        if(sysDict.getId() == null){
+        if (sysDict.getId() == null) {
             return dictMapper.insert(sysDict) == 1;
         } else {
             return dictMapper.updateById(sysDict) == 1;
@@ -42,9 +42,9 @@ public class DictServiceImpl implements DictService {
 
     @Override
     public boolean deleteById(Long id) {
-    	if(id == null){
-    		throw new NullPointerException("id");
-    	}
+        if (id == null) {
+            throw new NullPointerException("id");
+        }
         return dictMapper.deleteById(id) == 1;
     }
 }

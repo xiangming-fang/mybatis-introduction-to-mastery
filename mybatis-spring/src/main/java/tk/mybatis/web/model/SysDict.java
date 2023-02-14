@@ -3,8 +3,8 @@ package tk.mybatis.web.model;
 import java.io.Serializable;
 
 public class SysDict implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private Long id;
+    private static final long serialVersionUID = 1L;
+    private Long id;
     private String code;
     private String name;
     private String value;

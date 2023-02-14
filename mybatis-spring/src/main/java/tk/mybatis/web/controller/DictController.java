@@ -25,7 +25,7 @@ public class DictController {
 
     /**
      * 显示字典数据列表
-     * 
+     *
      * @param sysDict
      * @param offset
      * @param limit
@@ -41,7 +41,7 @@ public class DictController {
 
     /**
      * 新增或修改字典信息页面，使用 get 跳转到页面
-     * 
+     *
      * @param id
      * @return
      */
@@ -49,11 +49,11 @@ public class DictController {
     public ModelAndView add(Long id) {
         ModelAndView mv = new ModelAndView("dict_add");
         SysDict sysDict;
-        if(id == null){
-        	//如果 id 不存在，就是新增数据，创建一个空对象即可
+        if (id == null) {
+            //如果 id 不存在，就是新增数据，创建一个空对象即可
             sysDict = new SysDict();
         } else {
-        	//如果 id 存在，就是修改数据，把原有的数据查询出来
+            //如果 id 存在，就是修改数据，把原有的数据查询出来
             sysDict = dictService.findById(id);
         }
         mv.addObject("model", sysDict);
@@ -62,7 +62,7 @@ public class DictController {
 
     /**
      * 新增或修改字典信息，通过表单 post 提交数据
-     * 
+     *
      * @param sysDict
      * @return
      */
@@ -72,7 +72,7 @@ public class DictController {
         try {
             dictService.saveOrUpdate(sysDict);
             mv.setViewName("redirect:/dicts");
-        } catch (Exception e){
+        } catch (Exception e) {
             mv.setViewName("dict_add");
             mv.addObject("msg", e.getMessage());
             mv.addObject("model", sysDict);
@@ -82,7 +82,7 @@ public class DictController {
 
     /**
      * 通过 id 删除字典信息
-     * 
+     *
      * @param id
      * @return
      */

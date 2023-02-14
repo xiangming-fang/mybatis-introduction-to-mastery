@@ -23,10 +23,10 @@
 
         <!-- 3.2 标签用来定义一个插件，type指定插件的类全限定名 -->
         <!-- 一般用不到 -->
-<!--        <plugin type="org.mybatis.generator.plugins.CachePlugin">
-            <property name="cache_eviction" value="LRU"/>
-            <property name="cache_size" value="1024"/>
-        </plugin>-->
+        <!--        <plugin type="org.mybatis.generator.plugins.CachePlugin">
+                    <property name="cache_eviction" value="LRU"/>
+                    <property name="cache_size" value="1024"/>
+                </plugin>-->
 
         <!-- 3.3 用来配置如何生成注释信息，可以自定义控制生成的注释格式，tpye：自定义注释的类名 -->
         <!-- 有默认的，一般情况下适用默认即可-->
@@ -52,21 +52,21 @@
         <!-- targetProject ==> 目标项目的绝对路径或者相对路径 -->
         <!-- targetPackage ==> 存放实体类的目标包路径 -->
         <javaModelGenerator targetPackage="${pojoClassPackage}" targetProject="${classTargetProject}">
-            <property name="trimStrings" value="true" />
+            <property name="trimStrings" value="true"/>
             <!-- 所有实体类的基类 -->
-            <property name="rootClass" value="tk.mybatis.generator.pojo.BasePO" />
+            <property name="rootClass" value="tk.mybatis.generator.pojo.BasePO"/>
         </javaModelGenerator>
 
         <!-- 3.7 生成的mapper xml 文件存放路径 -->
         <!-- targetProject ==> 目标项目的绝对路径或者相对路径 -->
         <!-- targetPackage ==> 存放xml具体的文件夹路径 -->
-        <sqlMapGenerator targetPackage="${xmlResourceFolder}"  targetProject="${resourceTargetProject}"/>
+        <sqlMapGenerator targetPackage="${xmlResourceFolder}" targetProject="${resourceTargetProject}"/>
 
         <!-- 3.8 生成 mapper 接口 的存放路径 -->
         <!-- targetProject ==> 目标项目的绝对路径或者相对路径 -->
         <!-- targetPackage ==> 存放接口的具体包名路径 -->
         <!-- type ==> 客户端代码生成器，是基于xml 还是 注解，或者 混用-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="${daoClassPackage}"  targetProject="${classTargetProject}"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="${daoClassPackage}" targetProject="${classTargetProject}"/>
 
         <!-- 3.9 最重要的注解，要生成代码的表 % 是通配符，指定库下的所有表-->
         <table schema="mybatis" tableName="country">

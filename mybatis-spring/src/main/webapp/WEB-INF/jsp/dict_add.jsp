@@ -41,7 +41,7 @@
     </table>
 </form>
 <script>
-    function backToList(){
+    function backToList() {
         location.href = '${path}/dicts';
     }
 </script>
